@@ -6,12 +6,12 @@
 use Mix.Config
 
 # General application configuration
-config :phoenix,
+config :phoenix_chatbot,
   namespace: PhoenixChatbot,
   ecto_repos: [PhoenixChatbot.Repo]
 
 # Configures the endpoint
-config :phoenix, PhoenixChatbot.Endpoint,
+config :phoenix_chatbot, PhoenixChatbot.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "O+IESmwzMWSwgrNlNieUV0UmliN4/+xfJCrOVXiFDRlgh3TzyAODomQBQ5QgiBkm",
   render_errors: [view: PhoenixChatbot.ErrorView, accepts: ~w(html json)],
