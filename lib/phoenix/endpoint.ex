@@ -38,5 +38,6 @@ defmodule PhoenixChatbot.Endpoint do
     key: "_phoenix_key",
     signing_salt: "7WTx8dtS"
 
+  plug Corsica, allow_headers: ~w(Accept Content-Type Authorization)
   plug PhoenixChatbot.Router
 end
