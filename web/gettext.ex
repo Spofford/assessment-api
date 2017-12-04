@@ -20,5 +20,5 @@ defmodule PhoenixChatbot.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :phoenix
+  use Gettext, otp_app: :phoenix_chatbot
 end
