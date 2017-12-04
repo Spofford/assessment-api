@@ -19,7 +19,7 @@ defmodule PhoenixChatbot.Mixfile do
   def application do
     [mod: {PhoenixChatbot, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin]]
+                    :phoenix_ecto, :postgrex, :comeonin, :ueberauth, :ueberauth_identity]]
   end
 
   # Specifies which paths to compile per environment.
@@ -30,7 +30,8 @@ defmodule PhoenixChatbot.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.3.0-rc"},
+    [
+     {:phoenix, "~> 1.3.0-rc"},
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_ecto, "~> 3.0"},
      {:postgrex, ">= 0.0.0"},
@@ -39,7 +40,11 @@ defmodule PhoenixChatbot.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 2.3"},
-     {:corsica, "~> 0.4"}]
+     {:corsica, "~> 0.4"},
+     {:ueberauth, "~> 0.2"},
+     {:ueberauth_identity, "~> 0.2"},
+     {:guardian, "~> 0.10"}
+     ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

@@ -26,3 +26,18 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+config :ueberauth, Ueberauth,
+  providers: [
+    identity: {
+      Ueberauth.Strategy.Identity,
+      [callback_methods: ["POST"]]
+    }
+  ]
+
+  config :guardian, Guardian,
+    issuer: "PhoenixChatbot",
+    ttl: {30, :days},
+    secret_key: "HYICutSG9ODOVRp4kP/MD+bHpXBUkj17fp3y+nHDHp4avdPXJqH20epYUXOBqhNL",
+    serializer: PhoenixChatbot.GuardianSerializer,
+    permissions: %{default: [:read, :write]}
