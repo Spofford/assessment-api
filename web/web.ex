@@ -67,8 +67,9 @@ defmodule PhoenixChatbot.Web do
 
       alias PhoenixChatbot.Repo
       import Ecto
-      import Ecto.Query
+      import Ecto.Query, only: [from: 1, from: 2]
       import PhoenixChatbot.Gettext
+      import PhoenixChatbot.ChannelHelpers
     end
   end
 

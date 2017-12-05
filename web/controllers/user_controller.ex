@@ -21,7 +21,7 @@ defmodule PhoenixChatbot.UserController do
     {:error, changeset} ->
       conn
       |> put_status(:unprocessable_entity)
-      |> render(PhoenixChat.ChangesetView, "error.json", changeset: changeset)
+      |> render(PhoenixChatbot.ChangesetView, "error.json", changeset: changeset)
   end
 end
 

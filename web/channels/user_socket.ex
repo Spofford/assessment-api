@@ -2,7 +2,16 @@ defmodule PhoenixChatbot.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", PhoenixChatbot.RoomChannel
+  channel "room:*", PhoenixChatbot.RoomChannel
+
+  def connect(params, socket) do
+    socket = socket
+      |> assign(:user_id, params["id"])
+      |> assign(:username, params["username"])
+      # |> assign(:email, params["email"])
+      |> assign(:uuid, params["uuid"])
+    {:ok, socket}
+  end
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
