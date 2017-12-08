@@ -29,6 +29,13 @@ defmodule PhoenixChatbot.Router do
 
     get "/auth", AuthController, :test
     resources "/users", UserController, except: [:new, :edit]
+    resources "/surveys", SurveyController, except: [:new, :edit, :update]
+    resources "/survey-responses", SurveyResponseController, except: [:new, :edit]
+    resources "/responses", ResponseController, except: [:new, :edit]
+    resources "/response-choices", ResponseChoiceController, except: [:new, :edit]
+    resources "/questions", QuestionController, except: [:new, :edit]
+    resources "/question-types", QuestionTypesController, except: [:new, :edit]
+    resources "/orders", OrderController, except: [:new, :edit]
   end
 
   scope "/auth", PhoenixChatbot do
