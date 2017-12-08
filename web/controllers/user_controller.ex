@@ -9,21 +9,21 @@ defmodule PhoenixChatbot.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-  changeset = User.registration_changeset(%User{}, user_params)
+    changeset = User.registration_changeset(%User{}, user_params)
 
-  case Repo.insert(changeset) do
-    {:ok, user} ->
-      {:ok, token, _claims} = Guardian.encode_and_sign(user, :token)
+    case Repo.insert(changeset) do
+      {:ok, user} ->
+        {:ok, token, _claims} = Guardian.encode_and_sign(user, :token)
 
-      conn
-      |> put_status(:created)
-      |> render("show.json", user: user, token: token)
-    {:error, changeset} ->
-      conn
-      |> put_status(:unprocessable_entity)
-      |> render(PhoenixChatbot.ChangesetView, "error.json", changeset: changeset)
+        conn
+        |> put_status(:created)
+        |> render("show.json", user: user, token: token)
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(PhoenixChatbot.ChangesetView, "error.json", changeset: changeset)
+    end
   end
-end
 
   def show(conn, %{"id" => id}) do
     user = Repo.get!(User, id)

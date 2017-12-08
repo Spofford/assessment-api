@@ -1,0 +1,50 @@
+defmodule PhoenixChatbot.QuestionTypeController do
+  use PhoenixChatbot.Web, :controller
+
+  alias PhoenixChatbot.QuestionType
+
+  def create(conn, %{"question_type" => question_type_params}) do
+    changeset = QuestionType.changeset(%QuestionType{}, question_type_params)
+
+    case Repo.insert(changeset) do
+      {:ok, question_type} ->
+
+        conn
+        |> put_status(:created)
+        |> render("show.json", question_type: question_type)
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(PhoenixChatbot.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
+
+  def show(conn, %{"id" => id}) do
+    question_type = Repo.get!(QuestionType, id)
+    render(conn, "show.json", question_type: question_type)
+  end
+
+  def update(conn, %{"id" => id, "question_type" => question_type_params}) do
+    question_type = Repo.get!(QuestionType, id)
+    changeset = QuestionType.changeset(question_type, question_type_params)
+
+    case Repo.update(changeset) do
+      {:ok, question_type} ->
+        render(conn, "show.json", question_type: question_type)
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(PhoenixChatbot.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    question_type = Repo.get!(QuestionType, id)
+
+    # Here we use delete! (with a bang) because we expect
+    # it to always work (and if it does not, it will raise).
+    Repo.delete!(question_type)
+
+    send_resp(conn, :no_content, "")
+  end
+end
