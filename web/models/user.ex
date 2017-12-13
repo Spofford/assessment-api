@@ -16,19 +16,19 @@ defmodule PhoenixChatbot.User do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
-    |> validate_format(:email, ~r/@/)
-    |> validate_length(:username, min: 1, max: 20)
-    |> update_change(:email, &String.downcase/1)
-    |> unique_constraint(:email)
-    |> update_change(:username, &String.downcase/1)
+    # |> validate_format(:email, ~r/@/)
+    # |> validate_length(:username, min: 1, max: 20)
+    # |> update_change(:email, &String.downcase/1)
+    # |> unique_constraint(:email)
+    # |> update_change(:username, &String.downcase/1)
   end
 
   def registration_changeset(model, params) do
     model
     |> changeset(params)
-    |> cast(params, ~w(password), [])
-    |> validate_length(:password, min: 6, max: 100)
-    |> put_encrypted_pw
+    # |> cast(params, ~w(password), [])
+    # |> validate_length(:password, min: 6, max: 100)
+    # |> put_encrypted_pw
   end
 
   defp put_encrypted_pw(changeset) do

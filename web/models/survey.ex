@@ -3,7 +3,7 @@ defmodule PhoenixChatbot.Survey do
 
   schema "surveys" do
     field :version, :integer
-    has_many :orders, PhoenixChatbot.Order
+    # has_many :orders, PhoenixChatbot.Order
     has_many :survey_responses, PhoenixChatbot.SurveyResponse
 
     timestamps()
@@ -15,8 +15,6 @@ defmodule PhoenixChatbot.Survey do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
-    |> cast_assoc(:orders)
-    |> cast_assoc(:survey_responses)
   end
 
 end

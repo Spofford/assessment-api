@@ -2,9 +2,18 @@ defmodule PhoenixChatbot.SurveyResponseController do
   use PhoenixChatbot.Web, :controller
 
   alias PhoenixChatbot.SurveyResponse
+  alias PhoenixChatbot.User
+  alias PhoenixChatbot.Survey
 
-  def create(conn, %{"survey_response" => survey_response_params}) do
-    changeset = SurveyResponse.changeset(%SurveyResponse{}, survey_response_params)
+  def create(conn, %{"username" => username}) do
+    changeset = SurveyResponse.changeset(
+      %SurveyResponse{
+        survey: Repo.get(Survey, 1),
+        user: %User{
+          username: username
+        },
+      }, %{"params" => :empty}
+    )
 
     case Repo.insert(changeset) do
       {:ok, survey_response} ->
