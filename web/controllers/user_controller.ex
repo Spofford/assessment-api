@@ -1,7 +1,9 @@
 defmodule PhoenixChatbot.UserController do
   use PhoenixChatbot.Web, :controller
 
+  alias PhoenixChatbot.SurveyResponse
   alias PhoenixChatbot.User
+  alias PhoenixChatbot.Survey
 
   def index(conn, _params) do
     users = Repo.all(User)
@@ -14,6 +16,13 @@ defmodule PhoenixChatbot.UserController do
     case Repo.insert(changeset) do
       {:ok, user} ->
         {:ok, token, _claims} = Guardian.encode_and_sign(user, :token)
+
+        changeset = SurveyResponse.changeset(
+          %SurveyResponse{
+            survey: Repo.get(Survey, 1),
+            user: user,
+          }, %{"params" => :empty}
+        )
 
         conn
         |> put_status(:created)
