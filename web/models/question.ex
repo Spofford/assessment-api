@@ -1,12 +1,14 @@
 defmodule PhoenixChatbot.Question do
   use PhoenixChatbot.Web, :model
+  alias PhoenixChatbot.Repo
+  alias PhoenixChatbot.Order
 
   schema "questions" do
     field :text, :string
     has_one :order, PhoenixChatbot.Order
-    has_many :question_types, PhoenixChatbot.QuestionType
+    has_one :question_type, PhoenixChatbot.QuestionType
     has_many :response_choices, PhoenixChatbot.ResponseChoice
-    has_many :responses, PhoenixChatbot.Response
+    # has_many :responses, PhoenixChatbot.Response
 
     timestamps()
   end
@@ -21,6 +23,14 @@ defmodule PhoenixChatbot.Question do
     |> cast_assoc(:question_types)
     |> cast_assoc(:response_choices)
     |> cast_assoc(:responses)
+  end
+
+  def next_question(order_param) do
+    orders = Order.current_orders
+
+    order = Repo.get_by(orders, order: order_param)
+
+    Repo.one(Ecto.assoc(order, :question))
   end
 
 end

@@ -1,10 +1,13 @@
 defmodule PhoenixChatbot.Survey do
   use PhoenixChatbot.Web, :model
+  alias PhoenixChatbot.Repo
+  alias PhoenixChatbot.Survey
+  import Ecto.Query
 
   schema "surveys" do
     field :version, :integer
-    # has_many :orders, PhoenixChatbot.Order
-    has_many :survey_responses, PhoenixChatbot.SurveyResponse
+    has_many :orders, PhoenixChatbot.Order
+    # has_many :survey_responses, PhoenixChatbot.SurveyResponse
 
     timestamps()
   end
@@ -17,4 +20,7 @@ defmodule PhoenixChatbot.Survey do
     |> cast(params, @required_fields, @optional_fields)
   end
 
+  def current_survey do
+    Repo.get_by!(Survey, version: 1)
+  end
 end

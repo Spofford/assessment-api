@@ -17,7 +17,7 @@ defmodule PhoenixChatbot.UserController do
       {:ok, user} ->
         {:ok, token, _claims} = Guardian.encode_and_sign(user, :token)
 
-        changeset = SurveyResponse.changeset(
+        SurveyResponse.changeset(
           %SurveyResponse{
             survey: Repo.get(Survey, 1),
             user: user,

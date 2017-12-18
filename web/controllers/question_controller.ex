@@ -3,6 +3,16 @@ defmodule PhoenixChatbot.QuestionController do
 
   alias PhoenixChatbot.Question
 
+  def index(conn, %{"order" => order}) do
+
+    question = Question.next_question(order)
+
+    conn
+    |> Repo.preload([:question_type, :response_choices])
+    |> render(conn, "index.json", question: question)
+
+  end
+
   def create(conn, %{"question" => question_params}) do
     changeset = Question.changeset(%Question{}, question_params)
 
@@ -19,8 +29,8 @@ defmodule PhoenixChatbot.QuestionController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    question = Repo.get!(Question, id)
+  def show(conn, %{"question" => question}) do
+
     render(conn, "show.json", question: question)
   end
 
