@@ -3,7 +3,7 @@ defmodule PhoenixChatbot.QuestionType do
 
   schema "question_types" do
     field :name, :string
-    belongs_to :question, PhoenixChatbot.Question
+    has_many :questions, PhoenixChatbot.Question
 
     timestamps()
   end
@@ -14,7 +14,7 @@ defmodule PhoenixChatbot.QuestionType do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
-    |> cast_assoc(:question)
+    |> cast_assoc(:questions)
   end
 
 end

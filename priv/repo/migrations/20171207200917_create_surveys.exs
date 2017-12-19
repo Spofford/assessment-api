@@ -28,6 +28,7 @@ defmodule PhoenixChatbot.Repo.Migrations.CreateSurvey do
 
     create table(:questions) do
       add :text, :string
+      add :order, :integer
 
       timestamps()
     end

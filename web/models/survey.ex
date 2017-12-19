@@ -7,7 +7,7 @@ defmodule PhoenixChatbot.Survey do
   schema "surveys" do
     field :version, :integer
     has_many :orders, PhoenixChatbot.Order
-    # has_many :survey_responses, PhoenixChatbot.SurveyResponse
+    has_many :survey_responses, PhoenixChatbot.SurveyResponse
 
     timestamps()
   end
@@ -19,8 +19,5 @@ defmodule PhoenixChatbot.Survey do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
-
-  def current_survey do
-    Repo.get_by!(Survey, version: 1)
-  end
+  
 end

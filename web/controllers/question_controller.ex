@@ -5,11 +5,11 @@ defmodule PhoenixChatbot.QuestionController do
 
   def index(conn, %{"order" => order}) do
 
-    question = Question.next_question(order)
+    question = Repo.get_by(Question, order: order)
+    |> Repo.preload(:question_type)
+    |> Repo.preload(:response_choices)
 
-    conn
-    |> Repo.preload([:question_type, :response_choices])
-    |> render(conn, "index.json", question: question)
+    render(conn, "question.json", question: question)
 
   end
 

@@ -27,7 +27,7 @@ defmodule PhoenixChatbot.Repo.Migrations.CreateOrders do
     end
 
     alter table(:question_types) do
-      add :question_id, references(:questions)
+      add :questions, references(:questions)
     end
 
     alter table(:response_choices) do

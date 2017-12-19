@@ -1,9 +1,8 @@
 defmodule PhoenixChatbot.Order do
   use PhoenixChatbot.Web, :model
 
-  alias PhoenixChatbot.Survey
+  alias PhoenixChatbot.Order
   alias PhoenixChatbot.Repo
-  import Ecto.Query
 
   schema "orders" do
     field :order, :integer
@@ -24,7 +23,7 @@ defmodule PhoenixChatbot.Order do
   end
 
   def current_orders do
-    Ecto.assoc(Survey.current_survey, :orders)
+    from o in Order, where: o.survey_id == 1
   end
 
 end
