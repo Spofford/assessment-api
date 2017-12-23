@@ -1,11 +1,13 @@
 defmodule PhoenixChatbot.User do
   use PhoenixChatbot.Web, :model
 
+  @derive {Poison.Encoder, only: [:id, :username]}
   schema "users" do
     field :email, :string
     field :encrypted_password, :string
     field :username, :string
     field :password, :string, virtual: true
+    has_one :survey_response, PhoenixChatbot.SurveyResponse
 
     timestamps()
   end

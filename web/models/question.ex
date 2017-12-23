@@ -5,10 +5,8 @@ defmodule PhoenixChatbot.Question do
   schema "questions" do
     field :text, :string
     field :order, :integer
-    # has_one :order, PhoenixChatbot.Order
     belongs_to :question_type, PhoenixChatbot.QuestionType
     has_many :response_choices, PhoenixChatbot.ResponseChoice
-    has_many :responses, PhoenixChatbot.Response
 
     timestamps()
   end

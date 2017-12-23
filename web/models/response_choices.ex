@@ -5,6 +5,7 @@ defmodule PhoenixChatbot.ResponseChoice do
     belongs_to :question, PhoenixChatbot.Question
     has_many :responses, PhoenixChatbot.Response
     field :text, :string
+    field :open, :boolean
 
     timestamps()
   end

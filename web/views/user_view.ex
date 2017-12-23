@@ -1,7 +1,7 @@
 defmodule PhoenixChatbot.UserView do
   use PhoenixChatbot.Web, :view
 
-  alias PhoenixChatbot.{UserView}
+  alias PhoenixChatbot.{UserView, SurveyResponseView}
 
   def render("index.json", %{users: users}) do
     %{data: render_many(users, UserView, "user.json")}
@@ -12,19 +12,26 @@ defmodule PhoenixChatbot.UserView do
   end
 
   def render("show.json", %{user: user}) do
-    %{data: render_one(user, UserView, "user.json")}
+    %{email: user.email,
+      id: user.id,
+      username: user.username,
+      survey: render_one(user.survey_response, SurveyResponseView, "survey_response.json")
+      }
   end
 
   def render("user.json", %{user: user}) do
-    %{email: user.email,
-      id: user.id,
-      username: user.username}
+  %{email: user.email,
+    id: user.id,
+    username: user.username,
+    survey: render_one(user.survey_response, SurveyResponseView, "survey_response.json")}
   end
 
   def render("user_token.json", %{user: user, token: token}) do
     %{email: user.email,
       id: user.id,
       token: token,
-      username: user.username}
+      username: user.username,
+      survey: render_one(user.survey_response, SurveyResponseView, "survey_response.json")
+    }
   end
 end

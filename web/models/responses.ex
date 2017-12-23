@@ -2,10 +2,8 @@ defmodule PhoenixChatbot.Response do
   use PhoenixChatbot.Web, :model
 
   schema "responses" do
-    belongs_to :question, PhoenixChatbot.Question
-    belongs_to :response_choice, PhoenixChatbot.ResponseChoice
-    belongs_to :survey_response, PhoenixChatbot.SurveyResponse
-    belongs_to :user, PhoenixChatbot.User
+    has_one :response_choice, PhoenixChatbot.ResponseChoice
+    has_one :survey_response, PhoenixChatbot.SurveyResponse
     field :text, :string
 
     timestamps()
@@ -17,9 +15,9 @@ defmodule PhoenixChatbot.Response do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
-    |> cast_assoc(:question)
+#    |> cast_assoc(:question)
     |> cast_assoc(:survey_response)
-    |> cast_assoc(:user)
+    |> cast_assoc(:response_choice)
+#    |> cast_assoc(:user)
   end
-
 end

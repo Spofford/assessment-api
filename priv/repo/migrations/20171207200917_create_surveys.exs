@@ -2,17 +2,17 @@ defmodule PhoenixChatbot.Repo.Migrations.CreateSurvey do
   use Ecto.Migration
 
   def change do
-    create table(:surveys) do
-      add :version, :integer
+    # create table(:surveys) do
+    #  add :version, :integer
 
-      timestamps()
-    end
+    #  timestamps()
+    # end
 
-    create table(:orders) do
-      add :order, :integer
+    # create table(:orders) do
+    #  add :order, :integer
 
-      timestamps()
-    end
+    #  timestamps()
+    # end
 
     create table(:survey_responses) do
       add :completed_at, :utc_datetime
@@ -41,6 +41,7 @@ defmodule PhoenixChatbot.Repo.Migrations.CreateSurvey do
 
     create table(:response_choices) do
       add :text, :string
+      add :open, :boolean
 
       timestamps()
     end

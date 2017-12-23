@@ -1,9 +1,7 @@
 defmodule PhoenixChatbot.UserController do
   use PhoenixChatbot.Web, :controller
 
-  alias PhoenixChatbot.SurveyResponse
   alias PhoenixChatbot.User
-  alias PhoenixChatbot.Survey
 
   def index(conn, _params) do
     users = Repo.all(User)
@@ -17,12 +15,8 @@ defmodule PhoenixChatbot.UserController do
       {:ok, user} ->
         {:ok, token, _claims} = Guardian.encode_and_sign(user, :token)
 
-        SurveyResponse.changeset(
-          %SurveyResponse{
-            survey: Repo.get(Survey, 1),
-            user: user,
-          }, %{"params" => :empty}
-        )
+        Repo.insert(Ecto.build_assoc(user, :survey_response, %{}))
+        user = user |> Repo.preload(:survey_response)
 
         conn
         |> put_status(:created)
@@ -36,6 +30,7 @@ defmodule PhoenixChatbot.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Repo.get!(User, id)
+    |> Repo.preload(:survey_response)
     render(conn, "show.json", user: user)
   end
 

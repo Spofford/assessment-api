@@ -30,7 +30,8 @@ question1 = Ecto.build_assoc(basic, :questions,
         text: "I just like learning"
     },
     %ResponseChoice{
-        text: "Something else"
+        text: "Something else",
+        open: true
     }
   ]
 )
@@ -62,7 +63,8 @@ question2 = Ecto.build_assoc(basic, :questions,
         text: "Elderly relative moving in",
     },
     %ResponseChoice{
-        text: "Something else"
+        text: "Something else",
+        open: true
     }
   ]
 )
@@ -85,7 +87,8 @@ question3 = Ecto.build_assoc(basic, :questions,
         text: "Shopping",
     },
     %ResponseChoice{
-        text: "Something else"
+        text: "Something else",
+        open: true
     }
   ]
 )

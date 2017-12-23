@@ -4,8 +4,8 @@ defmodule PhoenixChatbot.SurveyResponse do
   @derive {Poison.Encoder, only: [:id, :completed_at]}
   schema "survey_responses" do
     field :completed_at, :utc_datetime
-    belongs_to :survey, PhoenixChatbot.Survey
-    # has_many :responses, PhoenixChatbot.Response
+    # belongs_to :survey, PhoenixChatbot.Survey
+    has_many :responses, PhoenixChatbot.Response
     belongs_to :user, PhoenixChatbot.User
 
     timestamps()
