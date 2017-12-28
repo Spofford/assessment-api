@@ -3,9 +3,9 @@ defmodule PhoenixChatbot.QuestionController do
 
   alias PhoenixChatbot.Question
 
-  def index(conn, %{"order" => order}) do
+  def index(conn, %{"order_value" => order_value}) do
 
-    question = Repo.get_by(Question, order: order)
+    question = Repo.get_by(Question, order_value: order_value)
     |> Repo.preload(:question_type)
     |> Repo.preload(:response_choices)
 

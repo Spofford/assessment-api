@@ -4,7 +4,7 @@ defmodule PhoenixChatbot.Question do
 
   schema "questions" do
     field :text, :string
-    field :order, :integer
+    field :order_value, :integer
     belongs_to :question_type, PhoenixChatbot.QuestionType
     has_many :response_choices, PhoenixChatbot.ResponseChoice
 

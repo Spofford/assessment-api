@@ -14,7 +14,7 @@ defmodule PhoenixChatbot.AuthController do
     case result do
       {:ok, user, token} ->
         conn
-        |> Repo.preload(:survey_response)
+        # |> Repo.preload(:survey_response)
         |> put_status(:created)
         |> render(UserView, "show.json", user: user, token: token)
       {:error, reason} ->
@@ -26,7 +26,7 @@ defmodule PhoenixChatbot.AuthController do
 
   def me(conn, _params) do
     user = Guardian.Plug.current_resource(conn)
-    |> Repo.preload(:survey_response)
+    # |> Repo.preload(:survey_response)
     render(conn, UserView, "show.json", user: user)
   end
 

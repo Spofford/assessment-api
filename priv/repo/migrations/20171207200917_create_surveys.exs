@@ -14,21 +14,22 @@ defmodule PhoenixChatbot.Repo.Migrations.CreateSurvey do
     #  timestamps()
     # end
 
-    create table(:survey_responses) do
-      add :completed_at, :utc_datetime
+    # create table(:survey_responses) do
+    #  add :completed_at, :utc_datetime
 
-      timestamps()
-    end
+    #  timestamps()
+    # end
 
     create table(:responses) do
       add :text, :string
+      add :response_value, :boolean
 
       timestamps()
     end
 
     create table(:questions) do
       add :text, :string
-      add :order, :integer
+      add :order_value, :integer
 
       timestamps()
     end

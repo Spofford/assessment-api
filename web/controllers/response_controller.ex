@@ -13,6 +13,7 @@ defmodule PhoenixChatbot.ResponseController do
         |> put_status(:created)
         |> render("show.json", response: response)
       {:error, changeset} ->
+
         conn
         |> put_status(:unprocessable_entity)
         |> render(PhoenixChatbot.ChangesetView, "error.json", changeset: changeset)

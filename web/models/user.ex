@@ -7,7 +7,6 @@ defmodule PhoenixChatbot.User do
     field :encrypted_password, :string
     field :username, :string
     field :password, :string, virtual: true
-    has_one :survey_response, PhoenixChatbot.SurveyResponse
 
     timestamps()
   end
@@ -33,12 +32,12 @@ defmodule PhoenixChatbot.User do
     # |> put_encrypted_pw
   end
 
-  defp put_encrypted_pw(changeset) do
-    case changeset do
-      %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
-        put_change(changeset, :encrypted_password, Comeonin.Bcrypt.hashpwsalt(pass))
-      _ ->
-        changeset
-    end
-  end
+  # defp put_encrypted_pw(changeset) do
+  #  case changeset do
+  #    %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
+  #      put_change(changeset, :encrypted_password, Comeonin.Bcrypt.hashpwsalt(pass))
+  #    _ ->
+  #      changeset
+  #  end
+  # end
 end
